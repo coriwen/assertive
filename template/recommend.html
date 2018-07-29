@@ -1,0 +1,29 @@
+{# RECOMMEND.HTML #}
+<head>
+		<title>Flask app</title>
+		<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/main-style.css') }}">
+</head>
+
+<style>
+body {
+	background-image: url({{ url_for('static', filename='imgs/bg.png')}});
+	background-repeat: no-repeat;
+}
+
+div#divForRecommend {
+	position: relative;
+	left: 200px;
+	width: 1224px;
+	height: 800px;
+}
+</style>
+
+<div id=divForRecommend>
+
+	<div> {{ appologiesResult }} </div>
+	<div> {{ cautiousResult }} </div>
+	<div> {{ qualifierResult }} </div>
+	<div> {{ puncResult }} </div>
+	<div> {{ thanksResult }} </div>
+</div>
+

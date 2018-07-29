@@ -1,0 +1,61 @@
+{# ANALYZE.HTML #}
+<head>
+		<title>Flask app</title>
+		<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/main-style.css') }}">
+</head>
+
+<style>
+body {
+	background-image: url({{ url_for('static', filename='imgs/bg.png')}})
+}
+</style>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<div style="position:relative; left:200px; margin-top:10px; display:inline-block">
+	<form method="POST">
+		{{ form.hidden_tag() }}
+		{{ form.message(class='messageToBeAnalyzed') }}
+		<br/>
+		{{ form.submit(class='moreInsight-button') }}
+		<input type="hidden" value="recommend" name="action" display="hidden"/>
+	</form>
+</div>
+<div style="display:inline-block; position:relative; margin-top: -50px; left:220px">
+	<div id="chart_div" style="width: 500px; height: 500px;"><div>
+</div>
+
+<script type='text/javascript'>//<![CDATA[ 
+ 
+google.load('visualization', '1', {packages: ['corechart', 'bar']});
+google.setOnLoadCallback(drawBasic);
+ 
+function drawBasic() {
+			var data = google.visualization.arrayToDataTable([
+				['Tone', 'Score', { role: 'style' }],
+				['{{tones[0]}}', {{scores[0]}}, 'gold'],
+				['{{tones[1]}}', {{scores[1]}}, 'silver'],
+				['{{tones[2]}}', {{scores[2]}}, 'brown'],
+				['{{tones[3]}}', {{scores[3]}}, 'blue']
+			]);
+ 
+			var options = {
+				title: 'Dominant Communication Style',
+				chartArea: {width: '50%'},
+				hAxis: {
+					title: '',
+					minValue: 0
+				},
+				vAxis: {
+					title: ''
+				}
+			};
+ 
+			var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+ 
+			chart.draw(data, options);
+		}
+//]]>  
+ 
+</script>
